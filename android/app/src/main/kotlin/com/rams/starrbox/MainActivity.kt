@@ -1,0 +1,5 @@
+package com.rams.starrbox
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity()
