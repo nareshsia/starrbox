@@ -74,61 +74,86 @@ class CustomTextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      onTap: onTap,
-      focusNode: node,
-      readOnly: readOnly,
-      keyboardType: keyboardType,
-      onChanged: onChanged,
-      onFieldSubmitted: onSubmit,
-      autovalidateMode: autoValidateMode,
-      inputFormatters: inputFormatters,
-      maxLines: line,
-      maxLength: length,
-      style: Theme.of(context).textTheme.bodyMedium,
-      cursorColor: Theme.of(context).primaryColor,
-      validator: onValidate,
-      obscureText: obscure!,
-      controller: controller,
-      decoration: InputDecoration(
-        suffix: suffixWidget,
-        counterText: "",
-        suffixIcon: suffixIcon,
-        suffixText: suffixText,
-        suffixStyle: TextStyle(
-            fontSize: 15.sp,
-            color: suffixTextColour,
-            fontWeight: FontWeight.bold),
-        prefixText: prefixText,
-        prefixIcon: prefixIcon,
-        suffixIconConstraints: suffixIconConstraints,
-        prefixIconConstraints: prefixIconConstraints,
-        filled: true,
-        fillColor: Theme.of(context).cardColor,
-        hintText: hintText,
-        hintStyle: Theme.of(context).textTheme.bodyMedium,
-        errorStyle: TextStyle(
-            fontSize: 15.5.sp,
-            color: Colors.redAccent,
-            fontWeight: FontWeight.normal),
-        border: OutlineInputBorder(
-            borderSide: BorderSide(color: Theme.of(context).colorScheme.onSurface),
-            borderRadius: BorderRadius.all(Radius.circular(10.sp))),
-        enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Theme.of(context).colorScheme.onSurface),
-            borderRadius: BorderRadius.all(Radius.circular(10.sp))),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Theme.of(context).colorScheme.onSurface),
-            borderRadius: BorderRadius.all(Radius.circular(10.sp))),
-        errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Theme.of(context).colorScheme.onSurface),
-            borderRadius: BorderRadius.all(Radius.circular(10.sp))),
-        focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color:Theme.of(context).colorScheme.onSurface),
-            borderRadius: BorderRadius.all(Radius.circular(10.sp))),
-        contentPadding: contentPadding ??
-            EdgeInsets.only(top: 10.sp, left: 15.sp, right: 15.sp),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        labelTwo != null
+            ? Column(
+                children: [
+                  Text(
+                    labelTwo!,
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
+                  SizedBox(
+                    height: 0.5.h,
+                  )
+                ],
+              )
+            : SizedBox.shrink(),
+        TextFormField(
+          onTap: onTap,
+          focusNode: node,
+          readOnly: readOnly,
+          keyboardType: keyboardType,
+          onChanged: onChanged,
+          onFieldSubmitted: onSubmit,
+          autovalidateMode: autoValidateMode,
+          inputFormatters: inputFormatters,
+          maxLines: line,
+          maxLength: length,
+          style: Theme.of(context).textTheme.bodyMedium,
+          cursorColor: Theme.of(context).primaryColor,
+          validator: onValidate,
+          obscureText: obscure!,
+          controller: controller,
+          decoration: InputDecoration(
+            suffix: suffixWidget,
+            counterText: "",
+            suffixIcon: suffixIcon,
+            suffixText: suffixText,
+            suffixStyle: TextStyle(
+                fontSize: 15.sp,
+                color: suffixTextColour,
+                fontWeight: FontWeight.bold),
+            prefixText: prefixText,
+            prefixIcon: prefixIcon,
+            suffixIconConstraints: suffixIconConstraints,
+            prefixIconConstraints: prefixIconConstraints,
+            filled: true,
+            fillColor: Theme.of(context).cardColor,
+            hintText: hintText,
+            hintStyle: TextStyle(
+              color: Theme.of(context).colorScheme.onTertiary
+            ),
+            errorStyle: TextStyle(
+                fontSize: 15.5.sp,
+                color: Colors.redAccent,
+                fontWeight: FontWeight.normal),
+            border: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: Theme.of(context).colorScheme.onSurface),
+                borderRadius: BorderRadius.all(Radius.circular(10.sp))),
+            enabledBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: Theme.of(context).colorScheme.onSurface),
+                borderRadius: BorderRadius.all(Radius.circular(10.sp))),
+            focusedBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: Theme.of(context).colorScheme.onSurface),
+                borderRadius: BorderRadius.all(Radius.circular(10.sp))),
+            errorBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: Theme.of(context).colorScheme.onSurface),
+                borderRadius: BorderRadius.all(Radius.circular(10.sp))),
+            focusedErrorBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: Theme.of(context).colorScheme.onSurface),
+                borderRadius: BorderRadius.all(Radius.circular(10.sp))),
+            contentPadding: contentPadding ??
+                EdgeInsets.only(top: 10.sp, left: 15.sp, right: 15.sp),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starrbox/core/constants/assets.dart';
 import 'package:starrbox/core/constants/strings.dart';
+import 'package:starrbox/routes/route_names.dart';
 
 import '../components/custom_textformfield.dart';
 
@@ -63,9 +64,13 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                 builder: (context, value, child) {
                   return InkWell(
                     borderRadius: BorderRadius.circular(10.sp),
-                    onTap: value ? () {
-
-                    } : null,
+                    onTap: value
+                        ? () {
+                            /// after successfully validate mobile number move to otp verification screen
+                            Navigator.pushNamed(
+                                context, RouteNames.otpVerification);
+                          }
+                        : null,
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.sp),
@@ -79,12 +84,13 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                       child: Center(
                         child: Text(
                           "Continue",
-                          style: TextStyle(color: value
-                              ? Theme.of(context).colorScheme.surface
-                              : Theme.of(context)
-                              .colorScheme
-                              .surface
-                              .withOpacity(0.5)),
+                          style: TextStyle(
+                              color: value
+                                  ? Theme.of(context).colorScheme.surface
+                                  : Theme.of(context)
+                                      .colorScheme
+                                      .surface
+                                      .withOpacity(0.5)),
                         ),
                       ),
                     ),
