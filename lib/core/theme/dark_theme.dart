@@ -11,7 +11,7 @@ final ColorScheme darkColorScheme = ColorScheme.dark(
   error: Colors.red[400]!,
   onError: Colors.black,
   tertiary: Colors.black26,
-  onTertiary: Colors.white24
+  onTertiary: Colors.white24,
 );
 
 final ThemeData darkTheme = ThemeData(

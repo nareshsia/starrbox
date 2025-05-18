@@ -35,6 +35,7 @@ class CustomTextFieldWidget extends StatelessWidget {
   final bool? enableBorder;
   final double? borderRadius;
   final EdgeInsets? contentPadding;
+  final bool? enable;
 
   const CustomTextFieldWidget({
     super.key,
@@ -69,7 +70,7 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.prefixIconConstraints,
     this.enableBorder,
     this.borderRadius,
-    this.contentPadding,
+    this.contentPadding, this.enable,
   });
 
   @override
@@ -106,6 +107,7 @@ class CustomTextFieldWidget extends StatelessWidget {
           validator: onValidate,
           obscureText: obscure!,
           controller: controller,
+          enabled: enable,
           decoration: InputDecoration(
             suffix: suffixWidget,
             counterText: "",

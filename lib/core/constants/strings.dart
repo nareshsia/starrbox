@@ -5,9 +5,11 @@ class AppStrings {
   static const verificationCodeDes = "We have sent a verification code to";
   static const didNotOTP = "Didn't get the OTP?";
   static const reSend = "Resend";
-  static const personalInfo = "Personal Information";
+  static const personalInfo = "Help Us Serve You Better!";
   static const name = "Name";
   static const nameHint = "Enter your name";
   static const email = "Email Address";
   static const emailHint = "Enter your email address";
+  static const dob = "Date of Birth";
+  static const dobHint = "Enter your date of birth";
 }
