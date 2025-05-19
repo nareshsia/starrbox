@@ -21,7 +21,7 @@ class _PersonalDetailsSectionState extends State<PersonalDetailsSection> {
   Widget build(BuildContext context) {
     final surveyController = widget.surveyController;
     return Form(
-      key: surveyController.formKey,
+      key: surveyController.formKeyPersonal,
       child: Column(
         children: [
           CustomTextFieldWidget(

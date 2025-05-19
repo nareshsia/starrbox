@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:starrbox/features/components/custom_textformfield.dart';
+import 'package:starrbox/features/survey/address_section.dart';
 import 'package:starrbox/features/survey/health_section.dart';
 import 'package:starrbox/features/survey/personal_details_section.dart';
 import 'package:starrbox/features/survey/survey_controller.dart';
-
 import '../../core/constants/strings.dart';
 
 class SurveyScreen extends StatefulWidget {
@@ -34,111 +33,127 @@ class _SurveyScreenState extends State<SurveyScreen> {
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
-      body: ValueListenableBuilder(
+      body: ValueListenableBuilder<int>(
         valueListenable: surveyController.currentStep,
-        builder: (context, value, child) {
+        builder: (context, value, _) {
           return Stepper(
             type: StepperType.horizontal,
             elevation: 0,
             currentStep: value,
-            stepIconBuilder: (stepIndex, stepState) {
-              if (stepState == StepState.complete) {
-                return Icon(Icons.check_circle,
-                    color: Theme.of(context).colorScheme.primary);
-              } else if (stepState == StepState.editing) {
-                return Icon(Icons.edit,
-                    color: Theme.of(context).colorScheme.secondary);
-              } else {
-                return CircleAvatar(
-                  backgroundColor: Theme.of(context).colorScheme.tertiary,
-                  radius: 12,
-                  child: Text(
-                    "${stepIndex + 1}",
-                    style: const TextStyle(color: Colors.white, fontSize: 12),
-                  ),
-                );
-              }
-            },
-            steps: [
-              Step(
-                  title: Text("Personal"),
-                  content: PersonalDetailsSection(
-                    surveyController: surveyController,
-                  ),
-                  isActive: value == 0,
-                  state: value == 0 ? StepState.editing : StepState.complete),
-              Step(
-                  title: Text("Address"),
-                  content: Container(),
-                  isActive: value == 1,
-                  state: value == 1
-                      ? StepState.editing
-                      : value == 2
-                          ? StepState.complete
-                          : StepState.disabled),
-              Step(
-                  title: Text("Health"),
-                  content: HealthSection(
-                    surveyController: surveyController,
-                  ),
-                  isActive: value == 2,
-                  state: value == 2 ? StepState.editing : StepState.disabled),
-            ],
+            stepIconBuilder: _buildStepIcon,
+            steps: _buildSteps(value),
             controlsBuilder: (context, details) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 4.h),
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(12.sp),
-                      onTap: details.onStepContinue,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 16.sp, vertical: 1.h),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.sp),
-                            color: Theme.of(context).colorScheme.primary),
-                        child: Center(
-                          child: Text(
-                            "Continue",
-                            style: TextStyle(fontSize: 16, color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
+                  _buildStepButton(
+                    context: context,
+                    label: AppStrings.next,
+                    onTap: details.onStepContinue,
                   ),
-                  if (surveyController.currentStep.value > 0)
-                    Padding(
-                      padding: EdgeInsets.only(top: 4.h, left: 5.w),
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(12.sp),
-                        onTap: details.onStepCancel,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16.sp, vertical: 1.h),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.sp),
-                              color: Theme.of(context).colorScheme.primary),
-                          child: Center(
-                            child: Text(
-                              "Back",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
+                  if (value > 0)
+                    SizedBox(width: 4.w),
+                  if (value > 0)
+                    _buildStepButton(
+                      context: context,
+                      label: AppStrings.back,
+                      onTap: details.onStepCancel,
                     ),
                 ],
               );
             },
-            onStepContinue: surveyController.onStepContinue,
+            onStepContinue: () {
+              surveyController.onStepContinue(context: context);
+            },
             onStepCancel: () {
               surveyController.currentStep.value -= 1;
             },
           );
         },
+      ),
+    );
+  }
+
+  /// Custom step icons
+  Widget? _buildStepIcon(int stepIndex, StepState state) {
+    final colorScheme = Theme.of(context).colorScheme;
+    const iconSize = 14.0;
+
+    switch (state) {
+      case StepState.complete:
+        return CircleAvatar(
+          backgroundColor: colorScheme.primary,
+          radius: 12,
+          child: Icon(Icons.check, color: Colors.white, size: iconSize),
+        );
+      case StepState.editing:
+        return CircleAvatar(
+          backgroundColor: colorScheme.primary,
+          radius: 12,
+          child: Icon(Icons.edit, color: Colors.white, size: iconSize),
+        );
+      default:
+        return CircleAvatar(
+          backgroundColor: colorScheme.tertiary,
+          radius: 12,
+          child: Text(
+            "${stepIndex + 1}",
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        );
+    }
+  }
+
+  /// Survey steps list
+  List<Step> _buildSteps(int currentStep) {
+    return [
+      Step(
+        title:  Text(AppStrings.personal),
+        content: PersonalDetailsSection(surveyController: surveyController),
+        isActive: currentStep == 0,
+        state: currentStep == 0 ? StepState.editing : StepState.complete,
+      ),
+      Step(
+        title:  Text(AppStrings.address),
+        content: AddressSection(surveyController: surveyController),
+        isActive: currentStep == 1,
+        state: currentStep == 1
+            ? StepState.editing
+            : currentStep > 1
+            ? StepState.complete
+            : StepState.disabled,
+      ),
+      Step(
+        title:  Text(AppStrings.health),
+        content: HealthSection(surveyController: surveyController),
+        isActive: currentStep == 2,
+        state: currentStep == 2 ? StepState.editing : StepState.disabled,
+      ),
+    ];
+  }
+
+  /// Custom button builder
+  Widget _buildStepButton({
+    required BuildContext context,
+    required String label,
+    required VoidCallback? onTap,
+  }) {
+    return Padding(
+      padding: EdgeInsets.only(top: 4.h,bottom: 4.h),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12.sp),
+        onTap: onTap,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 1.h),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.sp),
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          child: Text(
+            label,
+            style: const TextStyle(fontSize: 16, color: Colors.white),
+          ),
+        ),
       ),
     );
   }

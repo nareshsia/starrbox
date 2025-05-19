@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:starrbox/features/auth/otp_verification_screen.dart';
 import 'package:starrbox/features/auth/phone_auth_screen.dart';
 import 'package:starrbox/features/splash/splash_screen.dart';
+import 'package:starrbox/features/subscription/subscription_screen.dart';
 import 'package:starrbox/features/survey/survey_screen.dart';
 import 'package:starrbox/routes/route_names.dart';
 
@@ -23,10 +24,16 @@ class AppRouter {
           builder: (context) => OTPVerificationScreen(),
         );
 
-        case RouteNames.survey:
+      case RouteNames.survey:
         return MaterialPageRoute(
           builder: (context) => SurveyScreen(),
         );
+
+      case RouteNames.subscription:
+        return MaterialPageRoute(
+          builder: (context) => SubscriptionScreen(),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),

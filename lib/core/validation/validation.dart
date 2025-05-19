@@ -23,5 +23,40 @@ class Validation {
     return null; // null means no error
   }
 
+  static String? addressLine1(String? name) {
+    if (name == null || name.trim().isEmpty) {
+      return "Please enter your address line 1";
+    }
+    return null; // null means no error
+  }
+
+  static String? addressLine2(String? name) {
+    if (name == null || name.trim().isEmpty) {
+      return "Please enter your address line 2";
+    }
+    return null; // null means no error
+  }
+
+  static String? pinCode(String? name) {
+    if (name == null || name.trim().isEmpty) {
+      return "Please enter your pinCode";
+    }
+    return null; // null means no error
+  }
+
+  static String? state(String? name) {
+    if (name == null || name.trim().isEmpty) {
+      return "Please enter your state";
+    }
+    return null; // null means no error
+  }
+
+  static String? district(String? name) {
+    if (name == null || name.trim().isEmpty) {
+      return "Please enter your district";
+    }
+    return null; // null means no error
+  }
+
 // You can add more: phone, dob, etc.
 }

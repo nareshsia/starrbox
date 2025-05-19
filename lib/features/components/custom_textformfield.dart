@@ -109,6 +109,7 @@ class CustomTextFieldWidget extends StatelessWidget {
           controller: controller,
           enabled: enable,
           decoration: InputDecoration(
+
             suffix: suffixWidget,
             counterText: "",
             suffixIcon: suffixIcon,
