@@ -10,7 +10,7 @@ final ColorScheme darkColorScheme = ColorScheme.dark(
   onSurface: Colors.white,
   error: Colors.red[400]!,
   onError: Colors.black,
-  tertiary: Colors.black26,
+  tertiary: Color(0xFF2A2A2A),
   onTertiary: Colors.white24,
 );
 

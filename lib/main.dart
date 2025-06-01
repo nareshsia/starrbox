@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starrbox/core/theme/app_theme.dart';
 import 'package:starrbox/features/splash/splash_controller.dart';
+import 'package:starrbox/features/subscription/subscription_controller.dart';
 import 'package:starrbox/features/survey/survey_controller.dart';
 import 'package:starrbox/routes/app_router.dart';
 import 'package:starrbox/routes/route_names.dart';
@@ -26,6 +27,10 @@ void main() async {
       ChangeNotifierProvider(
         create: (context) => SurveyController(),
       ),
+      ChangeNotifierProvider(
+        create: (context) => SubscriptionController(),
+      ),
+
 
     ],
     child: const MyApp(),

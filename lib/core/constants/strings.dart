@@ -6,7 +6,7 @@ class AppStrings {
   static const didNotOTP = "Didn't get the OTP?";
   static const reSend = "Resend";
   static const personalInfo = "Help Us Serve You Better!";
-  static const chooseYours = "Choose Yours";
+  static const chooseYours = "Choose Your Healthy Box";
   static const name = "Name";
   static const nameHint = "Enter your name";
   static const email = "Email Address";

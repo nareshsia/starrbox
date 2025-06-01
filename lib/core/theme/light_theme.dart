@@ -11,5 +11,5 @@ final ColorScheme lightColorScheme = ColorScheme.light(
     error: Colors.red,
     onError: Colors.white,
     tertiary: Colors.grey.shade100,
-    onTertiary: Colors.grey.shade600
+    onTertiary: Colors.grey.shade600,
 );
